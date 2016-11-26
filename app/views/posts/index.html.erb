@@ -1,9 +1,28 @@
-
+<div class= "row">
+<div class= "col-md-12">
+<div class= "page-header">
 <% @posts.each do |post| %>
 
 <div class="post_wrapper">
 <h2 class ="title">
 <%= link_to post.title, post %></h2>
-<p class ="date"><%= post.created_at.strftime("%B, %d, %Y") %></p>
-</div> 
+
+<h5 class = "body">
+<p><%= post.body %></p></h5>
+<h6>
+<p class ="date">posted <%= post.created_at.strftime("%B, %d, %Y") %></p>
+</h6>
+<%= link_to like_post_path(post), method: :put, class: "btn btn-info" do %>
+<span class= "glyphicon glyphicon-heart"></span> Like
+<%= post.get_upvotes.size %>
 <% end %>
+<button type="button" class="btn btn-primary">
+  <span class="glyphicon glyphicon-tags"></span>
+  <%= post.comments.count %> Comments
+</button>
+
+</div> 
+
+<% end %>
+
+</div></div></div>

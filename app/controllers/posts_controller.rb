@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+	before_action :authenticate_user!
+  
 	def index
 		@posts = Post.all.order('created_at DESC')
 	end
@@ -37,6 +39,12 @@ class PostsController < ApplicationController
 		@post = Post.find(params[:id])
 		@post.destroy
 		redirect_to posts_path
+	end
+
+	def upvote
+		 @post = Post.find(params[:id])
+		@post.upvote_by current_user
+		redirect_to :back
 	end
 
 	private
